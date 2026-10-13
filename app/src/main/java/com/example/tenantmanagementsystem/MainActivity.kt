@@ -1,40 +1,76 @@
 package com.example.tenantmanagementsystem
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tenantmanagementsystem.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private var lastTenant: Tenant? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        // Inflate the binding layout
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Set button listener
-        binding.saveButton.setOnClickListener {
-            val name = binding.tenantNameEditText.text.toString()
+        // Try It Yourself: Toast user's email passed from LoginActivity
+        val userEmail = intent.getStringExtra("USER_EMAIL")
+        if (!userEmail.isNullOrEmpty()) {
+            Toast.makeText(this, "Logged in as $userEmail", Toast.LENGTH_SHORT).show()
+        }
 
-            // Step 1 of Try It Yourself: Check if name is empty
-            if (name.isBlank()) {
-                binding.tenantNameEditText.error = "Tenant name is required"
+        binding.saveButton.setOnClickListener {
+            val name = binding.tenantNameEditText.text.toString().trim()
+            val phone = binding.phoneEditText.text.toString().trim()
+            val rent = binding.rentEditText.text.toString().trim()
+
+            // Try It Yourself: Check if any field is empty
+            if (name.isEmpty() || phone.isEmpty() || rent.isEmpty()) {
+                if (name.isEmpty()) binding.tenantNameEditText.error = "Required"
+                if (phone.isEmpty()) binding.phoneEditText.error = "Required"
+                if (rent.isEmpty()) binding.rentEditText.error = "Required"
+                Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
-            val phone = binding.phoneEditText.text.toString()
-            val rent = binding.rentEditText.text.toString()
-
             val tenant = Tenant(name, phone, rent)
             binding.tenant = tenant
+            lastTenant = tenant
 
-            // Step 4 of Try It Yourself: Clear input fields after saving
+            // Clear input fields
             binding.tenantNameEditText.text.clear()
             binding.phoneEditText.text.clear()
             binding.rentEditText.text.clear()
+        }
+
+        binding.callButton.setOnClickListener {
+            val tenant = lastTenant
+            if (tenant == null) {
+                Toast.makeText(this, "Save a tenant first", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            val intent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:${tenant.phone}"))
+            startActivity(intent)
+        }
+
+        // Try It Yourself: Share tenant details via Intent.ACTION_SEND
+        binding.shareButton.setOnClickListener {
+            val tenant = lastTenant
+            if (tenant == null) {
+                Toast.makeText(this, "Save a tenant first", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            val intent = Intent(Intent.ACTION_SEND).apply {
+                type = "text/plain"
+                putExtra(Intent.EXTRA_TEXT, tenant.summary())
+            }
+            startActivity(Intent.createChooser(intent, "Share tenant"))
         }
     }
 }
