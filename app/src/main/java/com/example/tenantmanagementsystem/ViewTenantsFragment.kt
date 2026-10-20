@@ -24,7 +24,6 @@ class ViewTenantsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // For now, hide the "Just added" section. Practical 3 shows it when a tenant is passed in.
         binding.newTenantGroup.visibility = View.GONE
 
         val tenants = TenantRepository.tenants
@@ -32,7 +31,7 @@ class ViewTenantsFragment : Fragment() {
         if (tenants.isEmpty()) {
             binding.allTenantsTextView.text = "No tenants yet. Add one from the Dashboard."
         } else {
-            // Each tenant's summary, with a blank line between them
+            
             binding.allTenantsTextView.text = tenants.joinToString("\n\n") { it.summary() }
         }
     }
