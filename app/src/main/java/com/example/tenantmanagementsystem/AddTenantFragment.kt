@@ -24,7 +24,7 @@ class AddTenantFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // The SAVE button is added in Practical 3
+        
     }
 
     override fun onDestroyView() {
