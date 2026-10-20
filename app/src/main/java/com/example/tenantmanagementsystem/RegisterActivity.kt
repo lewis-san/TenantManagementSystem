@@ -40,7 +40,6 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
-    // ── LIFECYCLE METHODS (Try It Yourself) ───────────────────────
     override fun onStart() {
         super.onStart()
         Log.d("TENANT_LIFECYCLE", "RegisterActivity: onStart")
