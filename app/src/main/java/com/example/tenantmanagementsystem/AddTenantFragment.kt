@@ -1,6 +1,8 @@
 package com.example.tenantmanagementsystem
 
 import android.os.Bundle
+import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,7 +24,25 @@ class AddTenantFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+        binding.saveButton.setOnClickListener {
+
+            val name = binding.tenantNameEditText.text.toString().trim()
+            val phone = binding.phoneEditText.text.toString().trim()
+            val rent = binding.rentEditText.text.toString().trim()
+
+            if (name.isEmpty() || phone.isEmpty() || rent.isEmpty()) {
+                Toast.makeText(requireContext(), "Please fill in all fields", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+
+            val tenant = Tenant(name, phone, rent)
+            TenantRepository.addTenant(tenant)
+
+
+            val action = AddTenantFragmentDirections.actionAddTenantFragmentToViewTenantsFragment(tenant)
+            findNavController().navigate(action)
+        }
 
         
     }
