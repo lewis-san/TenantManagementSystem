@@ -1,4 +1,4 @@
-package com.example.tenantmanagementsystemgroupa
+package com.example.tenantmanagementsystem
 
 import android.os.Bundle
 import android.util.Log

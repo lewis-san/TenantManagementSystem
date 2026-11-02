@@ -8,6 +8,7 @@
     android:padding="16dp"
     android:background="#1F4E79">
 
+
     <TextView
         android:id="@+id/headerTitleTextView"
         android:layout_width="wrap_content"
