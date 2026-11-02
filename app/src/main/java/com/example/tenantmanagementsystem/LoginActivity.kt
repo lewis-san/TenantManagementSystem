@@ -73,7 +73,6 @@ class LoginActivity : AppCompatActivity() {
         super.onRestart()
         Log.d("TENANT_LIFECYCLE", "LoginActivity: onRestart")
     }
-
     override fun onDestroy() {
         super.onDestroy()
         Log.d("TENANT_LIFECYCLE", "LoginActivity: onDestroy")

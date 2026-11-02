@@ -29,25 +29,20 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // 1. Use Toolbar as the App Bar
         setSupportActionBar(binding.toolbar)
 
-        // 2. Retrieve NavController from NavHost
         val navHostFragment = supportFragmentManager
             .findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
 
-        // 3. Define top-level destinations and link the Drawer Layout
         appBarConfiguration = AppBarConfiguration(
             setOf(R.id.dashboardFragment, R.id.addTenantFragment, R.id.viewTenantsFragment),
             binding.drawerLayout
         )
 
-        // 4. Connect App Bar and Navigation View to NavController
         setupActionBarWithNavController(navController, appBarConfiguration)
         binding.navView.setupWithNavController(navController)
 
-        // 5. Read email extra and bind to header layout
         val email = intent.getStringExtra("EMAIL")
         val headerBinding = NavHeaderBinding.bind(binding.navView.getHeaderView(0))
         headerBinding.headerEmailTextView.text = email ?: "Signed in"

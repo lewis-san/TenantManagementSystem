@@ -64,7 +64,6 @@ class RegisterActivity : AppCompatActivity() {
         super.onRestart()
         Log.d("TENANT_LIFECYCLE", "RegisterActivity: onRestart")
     }
-
     override fun onDestroy() {
         super.onDestroy()
         Log.d("TENANT_LIFECYCLE", "RegisterActivity: onDestroy")

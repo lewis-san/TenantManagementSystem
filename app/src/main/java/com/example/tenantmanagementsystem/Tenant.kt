@@ -8,7 +8,6 @@ data class Tenant(
     val rent: String
 ) : Serializable {
 
- 
     fun summary(): String {
         return "Tenant: $name\nPhone: $phone\nRent paid: KSh $rent"
     }

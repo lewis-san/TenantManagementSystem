@@ -75,7 +75,6 @@ class DashboardFragment : Fragment() {
         Log.d("TENANT_LIFECYCLE", "DashboardFragment: onDestroyView")
         _binding = null
     }
-
     override fun onDestroy() {
         super.onDestroy()
         Log.d("TENANT_LIFECYCLE", "DashboardFragment: onDestroy")

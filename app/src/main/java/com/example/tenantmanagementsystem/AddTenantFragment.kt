@@ -35,7 +35,6 @@ class AddTenantFragment : Fragment() {
                 return@setOnClickListener
             }
 
-
             val tenant = Tenant(name, phone, rent)
             TenantRepository.addTenant(tenant)
 

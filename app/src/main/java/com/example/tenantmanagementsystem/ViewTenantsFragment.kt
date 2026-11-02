@@ -15,7 +15,6 @@ class ViewTenantsFragment : Fragment() {
     private var _binding: FragmentViewTenantsBinding? = null
     private val binding get() = _binding!!
 
-    // Retrieve the Safe Args passed from AddTenantFragment
     private val args: ViewTenantsFragmentArgs by navArgs()
 
     override fun onCreateView(
@@ -45,7 +44,6 @@ class ViewTenantsFragment : Fragment() {
             }
         }
 
-        // Display all tenants from the repository
         val tenants = TenantRepository.tenants
         if (tenants.isEmpty()) {
             binding.allTenantsTextView.text = "No tenants yet. Add one from the Dashboard."
